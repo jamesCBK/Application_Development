@@ -7,7 +7,18 @@ package ticketreservationsystem;
 import java.util.*;
 /**
  *
- * @author HP
+ * @author Jayachandran
+ */
+/*
+ The class register contains all the oprations which is called by the main class from instance object creation.
+ Collection Framework used are Hash map and array list.
+ 
+ * Hash Map : In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values.
+ A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
+
+ * Arraylist : The ArrayList class extends AbstractList and implements the List interface. ArrayList supports dynamic arrays that can grow as needed. Standard Java arrays are of a fixed length.
+ After arrays are created, they cannot grow or shrink, which means that you must know in advance how many elements an array will hold.
+
  */
 class Register
 {
@@ -70,9 +81,6 @@ class Register
             System.out.println("Wrong Booking Id");
        }}
 }
-
-
-// }
 public class TicketReservationSystem {
     /**
      * @param args the command line arguments
@@ -109,7 +117,6 @@ public class TicketReservationSystem {
                   viewtickets = input.nextInt();
                   Register viewobject = new Register(viewtickets);
                   viewobject.getticketdetails();
-
     }}
     }
 }
