@@ -22,31 +22,44 @@ import java.util.ArrayList;
 class SuperStorage{
      static int RandomBooking=101;
      static List bhaagubhali=new ArrayList<Integer>(Arrays.asList(9,9,9,9,9,9));
+     static List deletestore=new ArrayList<Integer>();
      static Map<Integer, ArrayList<Integer>> BookingHistory = new HashMap<Integer, ArrayList<Integer>>();
 }
 class canceltickets extends SuperStorage
 {
-    int TicketNumber;
-  public canceltickets(int ticketnumber)
+
+
+    int ticketnumber;
+  public canceltickets(int TicketNumber)
     {
        ticketnumber = TicketNumber;
     }
     void removeticket()
     {
-        if(BookingHistory.containsKey(TicketNumber))
+        if(BookingHistory.containsKey(ticketnumber))
         {
-            BookingHistory.remove(TicketNumber);
+            deletestore = BookingHistory.get(ticketnumber );
+
+           
+            System.out.println(deletestore+"");
+            Object remote = deletestore.get(0);
+            System.out.println(remote+"");
+           // BookingHistory.remove(ticketnumber);
+
+
         }
         else
         {
-            System.out.println("Wrong Booking Id");
+//            Register r1 = new Register ();
+//            System.out.println("Wrong Booking Id");
+
         }
 
     }
 }
 class Register extends SuperStorage
 {
-   
+
     String Fullname;
     int Age;
     double ContactNumber;
