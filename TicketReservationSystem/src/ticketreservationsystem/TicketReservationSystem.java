@@ -5,6 +5,7 @@
 
 package ticketreservationsystem;
 import java.util.*;
+import java.util.ArrayList;
 /**
  *
  * @author Jayachandran
@@ -23,10 +24,29 @@ class SuperStorage{
      static List bhaagubhali=new ArrayList<Integer>(Arrays.asList(9,9,9,9,9,9));
      static Map<Integer, ArrayList<Integer>> BookingHistory = new HashMap<Integer, ArrayList<Integer>>();
 }
+class canceltickets extends SuperStorage
+{
+    int TicketNumber;
+  public canceltickets(int ticketnumber)
+    {
+       ticketnumber = TicketNumber;
+    }
+    void removeticket()
+    {
+        if(BookingHistory.containsKey(TicketNumber))
+        {
+            BookingHistory.remove(TicketNumber);
+        }
+        else
+        {
+            System.out.println("Wrong Booking Id");
+        }
+
+    }
+}
 class Register extends SuperStorage
 {
    
- 
     String Fullname;
     int Age;
     double ContactNumber;
@@ -68,7 +88,13 @@ class Register extends SuperStorage
             BookingHistory.put(RandomBooking,new ArrayList<Integer>(Arrays.asList(Numberoftickets, seatindexbook, RandomBooking)));
             RandomBooking++;
 
-//iterator
+/*iterator example just to make a view
+ * it return all values and responding keys of it
+ * Entry set is a method used in iterator
+ * For loop is used to iterate till the end
+ * getValue return the values, getKey return the keys in the hashmap
+ *
+ */
         for (Map.Entry<Integer, ArrayList<Integer>> entry : BookingHistory.entrySet()) {
                      System.out.print(entry.getKey()+" | ");
         for(int key2 : entry.getValue())
@@ -86,12 +112,15 @@ class Register extends SuperStorage
        TicketId = viewtickets;
    }
    void getticketdetails(){
-
+/*To retrieve details based on the booking id the ticket details is displayed.
+ * Array list is used to display
+ *
+ */
        System.out.println("" +TicketId);
        if(BookingHistory.containsKey(TicketId))
        {
-      
-          // System.out.println(BookingHistory.containsKey(TicketId));
+        ArrayList display = BookingHistory.get(TicketId);
+        System.out.println(display+"");
        }
 
        else
@@ -107,13 +136,13 @@ public class TicketReservationSystem {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        int viewtickets;
+        int viewtickets, removetickets;
         System.out.println("-----------Welcome to ticket booking centre-------------");
         System.out.println(" Enter 1 to login and 2 to Exit");
         Scanner input = new Scanner(System.in);
         int start = input.nextInt();
         while(start==1){
-            System.out.println("Enter anyone of the option 1.Register 2.View booking details");
+            System.out.println("Enter anyone of the option 1.Register 2.View booking details 3.Remove booking");
             int option = input.nextInt();
         switch(option){
             case 1:
@@ -136,6 +165,16 @@ public class TicketReservationSystem {
                   viewtickets = input.nextInt();
                   Register viewobject = new Register(viewtickets);
                   viewobject.getticketdetails();
+            case 3 :
+                System.out.println("Remove the booking");
+                System.out.println("enter booking id");
+                removetickets = input.nextInt();
+                canceltickets cancellation = new canceltickets(removetickets);
+                cancellation.removeticket();
+
+
+
+
     }}
     }
 }
