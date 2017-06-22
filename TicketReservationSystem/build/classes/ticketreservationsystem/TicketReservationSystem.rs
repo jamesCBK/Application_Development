@@ -1,2 +1,3 @@
-ticketreservationsystem.Reserve
+ticketreservationsystem.Register
+ticketreservationsystem.SuperStorage
 ticketreservationsystem.TicketReservationSystem

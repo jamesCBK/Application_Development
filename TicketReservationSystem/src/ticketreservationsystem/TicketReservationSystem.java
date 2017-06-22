@@ -12,23 +12,26 @@ import java.util.*;
 /*
  The class register contains all the oprations which is called by the main class from instance object creation.
  Collection Framework used are Hash map and array list.
- 
+
  * Hash Map : In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values.
  A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
-
  * Arraylist : The ArrayList class extends AbstractList and implements the List interface. ArrayList supports dynamic arrays that can grow as needed. Standard Java arrays are of a fixed length.
  After arrays are created, they cannot grow or shrink, which means that you must know in advance how many elements an array will hold.
-
  */
-class Register
+class SuperStorage{
+     static int RandomBooking=101;
+     static List bhaagubhali=new ArrayList<Integer>(Arrays.asList(9,9,9,9,9,9));
+     static Map<Integer, ArrayList<Integer>> BookingHistory = new HashMap<Integer, ArrayList<Integer>>();
+}
+class Register extends SuperStorage
 {
-    List bhaagubhali=new ArrayList<Integer>(Arrays.asList(9,9,9,9,9,9));
-    Map<Integer, List<Object>> BookingHistory = new HashMap<Integer, List<Object>>();
+   
+ 
     String Fullname;
     int Age;
     double ContactNumber;
     int movieselect,Numberoftickets,totalcost;
-    int RandomBooking=101,seatindex,seatindexbook,Continueselect,viewticket;
+    int seatindex,seatindexbook,Continueselect,viewticket;
     int TicketId;
     Scanner input = new Scanner(System.in);
    public Register(String name, int age, double contactnumber)
@@ -45,7 +48,7 @@ class Register
             Numberoftickets = input.nextInt();
             totalcost = Numberoftickets*2;
             System.out.println("total cost: " +totalcost);
-             System.out.println("if you wish to continue press 1 else 0 ");
+            System.out.println("if you wish to continue press 1 else 0 ");
             Continueselect  = input.nextInt();
             if(Continueselect==1)
             {
@@ -62,7 +65,18 @@ class Register
             System.out.println(""+bhaagubhali);
             System.out.println("Sucessfully booked");
             System.out.println("Your Booking id is"+RandomBooking);
-            BookingHistory.put(RandomBooking,new ArrayList<Object>(Arrays.asList(Numberoftickets, seatindexbook, RandomBooking)));          
+            BookingHistory.put(RandomBooking,new ArrayList<Integer>(Arrays.asList(Numberoftickets, seatindexbook, RandomBooking)));
+            RandomBooking++;
+
+//iterator
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : BookingHistory.entrySet()) {
+                     System.out.print(entry.getKey()+" | ");
+        for(int key2 : entry.getValue())
+        {
+            System.out.print(key2+" ");
+        }
+        System.out.println();
+    }
             }else{
                 book();
             }
@@ -72,10 +86,14 @@ class Register
        TicketId = viewtickets;
    }
    void getticketdetails(){
+
+       System.out.println("" +TicketId);
        if(BookingHistory.containsKey(TicketId))
        {
-        System.out.println("The Details are\n"+BookingHistory.get(viewticket));
-   }
+      
+          // System.out.println(BookingHistory.containsKey(TicketId));
+       }
+
        else
        {
             System.out.println("Wrong Booking Id");
@@ -88,6 +106,7 @@ public class TicketReservationSystem {
 
     public static void main(String[] args) {
         // TODO code application logic here
+
         int viewtickets;
         System.out.println("-----------Welcome to ticket booking centre-------------");
         System.out.println(" Enter 1 to login and 2 to Exit");
