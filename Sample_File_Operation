@@ -1,0 +1,35 @@
+// Test_App.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <string>
+
+
+using namespace std;
+void check(ifstream& myfilename, string linelist ){
+    while ( myfilename >> linelist )
+    {
+      cout << linelist << endl;
+	  if(linelist == "owl")
+	  {
+		  cout << "1";
+	  }
+	  else{
+		  cout << "0";}
+	}
+    myfilename.close();
+}
+void main () {
+	string line[]={"orange","apple","owl"};
+	ifstream myfile ("C:\\Users\\JayachandranRamesh\\Documents\\test.txt"); 
+  if (myfile.is_open())
+  {
+	  for(int i=0;i<3;i++){
+		  check(myfile,line[i]);}
+  }
+  else cout << "Unable to open file"; 
+  cin.get();
+}
