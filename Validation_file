@@ -1,0 +1,49 @@
+// Test_App.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <string>
+#include <map>
+
+
+using namespace std;
+void check(ifstream& myfilename ){
+	multimap<string,string> maptest;
+	multimap<string,string>::iterator it;
+	string linelist,linelist2;
+	string test,test2;
+	string checktext,checked;
+	while(!myfilename.eof()){
+    getline( myfilename , linelist );
+	linelist2 = linelist.substr(0,linelist.find(";"));
+	if(linelist2.find_first_not_of("#")){}
+	else{
+		size_t pos = linelist2.find("=");
+		
+		test = linelist2.substr(0,pos);
+		test2 = linelist2.substr(pos+1);
+		
+			maptest.insert(make_pair(test,test2));
+	
+		}	
+	}
+
+	for(multimap<string,string>::iterator it=maptest.begin(); it!=maptest.end();it++)
+	{
+		cout << it->first << "=>" << it->second << "\n";
+	}
+    myfilename.close();
+}
+void main () {
+	
+	ifstream myfile ("C:\\Users\\JayachandranRamesh\\Documents\\test.txt"); 
+  if (myfile.is_open())
+  {
+		  check(myfile);
+  }
+  else cout << "Unable to open file"; 
+  cin.get();
+}
