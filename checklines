@@ -1,0 +1,105 @@
+// test.cpp : Defines the entry point for the console application.
+//
+
+
+#include "stdafx.h"
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <iterator>
+#include <cstring>
+#include <fstream>
+#include <string>
+#include <map>
+#include <vector>
+#include<map>
+using namespace std;
+
+struct module  {
+    vector <string> name;
+	vector <int> data_len;
+    map<string,int> value;
+	map<std::string,int> data_const; 
+  };
+module function(std::vector <std::pair<std::string,std::string>>getlist2)  {
+    module mod;
+    std::string s1,s;
+	int counter=0;
+    std::vector<std::string> array;
+	 std::vector<int> line2;
+    std::string tmp;
+	    for(std::vector <std::pair<std::string,std::string>>::iterator it=getlist2.begin(); it!=getlist2.end();it++)
+	    {
+		if(it->first=="Module"){
+	    std::stringstream ss(it->second.c_str());
+		while(std::getline(ss, tmp, ',')){
+        array.push_back(tmp);
+		}
+		}else if(it->first=="data_len "){
+			line2.push_back(stoi(it->second));
+		}
+		else if(strstr(it->first.c_str(),"data_const")){
+			counter++;
+			//mod.data_const.insert(pair<std::string, int>(it->first,it->second));
+		}
+	}	
+	mod.data_len	=line2;
+    mod.name= array;
+	std::cout<<counter<<"\n";
+    /*mod.value["ext_usr_data_ref(1)"].push_back(50);
+    mod.value["ext_usr_data_ref(1)"].push_back(51);
+    mod.value["ext_usr_data_ref(2)"].push_back(77);*/
+    return mod;
+}
+int main() {
+    map<string, module> my_map;
+    std::string s,s1;
+	std::vector <std::pair<std::string,std::string>> getlist;
+	std::string linelist,linelist2;
+	std::string test,test2;
+  ifstream myfile ("C:\\Users\\JayachandranRamesh\\Documents\\test.txt"); 
+  if (myfile.is_open())
+  {
+	  while(!myfile.eof()){
+      getline( myfile , linelist );                          // (#)removes comment  
+	linelist2 = linelist.substr(0,linelist.find(";"));
+	if(linelist2.find_first_not_of("#")){}
+	else{
+		size_t pos = linelist2.find("=");
+		test = linelist2.substr(0,pos);
+		test2 = linelist2.substr(pos+1);
+		getlist.push_back(make_pair(test,test2));
+		}	
+	}
+	for(std::vector <std::pair<std::string,std::string>>::iterator it=getlist.begin(); it!=getlist.end();it++)
+	{
+		std::cout << it->first << "=>" << it->second << "\n";
+	}
+	myfile.close();
+    }
+  else cout << "Unable to open file"; 
+
+   /* my_map[s]= function();
+    module ss=my_map[s];*/
+	 my_map[s] = function(getlist);
+	module ss=my_map[s];
+    for(auto it = ss.name.begin() ; it != ss.name.end(); ++it){
+        std::cout <<'\n' << (*it) << std:: endl;
+    }
+	for(auto it = ss.data_len.begin();it!=ss.data_len.end();++it){
+		 std::cout <<'\n' << (*it) << std:: endl;
+	}
+  /* for(map<string, vector<int>>::iterator it = ss.value.begin(); it != ss.value.end(); ++it) {
+        for(auto itr = ss.value[it->first].begin(); itr != ss.value[it->first].end(); ++itr){
+        std::cout <<'\n' << it->first << " = " << (*itr) << std:: endl;
+        }
+    }*/
+	cin.get();
+}
+
+
